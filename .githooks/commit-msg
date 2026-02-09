@@ -1,0 +1,42 @@
+#!/bin/sh
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+PATTERN="^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?: .{1,}$"
+
+if echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
+    exit 0
+else
+    echo ""
+    echo "❌ Invalid commit message format!"
+    echo ""
+    echo "Your commit message:"
+    echo "  \"$COMMIT_MSG\""
+    echo ""
+    echo "Expected format (Conventional Commits):"
+    echo "  type(scope): description"
+    echo ""
+    echo "Valid types:"
+    echo "  feat:     A new feature"
+    echo "  fix:      A bug fix"
+    echo "  docs:     Documentation only changes"
+    echo "  style:    Code style changes (formatting, missing semi colons, etc)"
+    echo "  refactor: Code change that neither fixes a bug nor adds a feature"
+    echo "  perf:     Performance improvements"
+    echo "  test:     Adding or updating tests"
+    echo "  build:    Changes to build system or dependencies"
+    echo "  ci:       Changes to CI configuration files"
+    echo "  chore:    Other changes that don't modify src or test files"
+    echo "  revert:   Reverts a previous commit"
+    echo ""
+    echo "Examples:"
+    echo "  feat: add user authentication"
+    echo "  feat(api): add user authentication endpoint"
+    echo "  fix: resolve null reference exception"
+    echo "  fix(auth): resolve login timeout issue"
+    echo "  docs: update README with setup instructions"
+    echo "  refactor(services): simplify user service logic"
+    echo ""
+    exit 1
+fi
