@@ -10,6 +10,8 @@ trim_trailing_whitespace = true
 # Specific settings for C# files
 [*.cs]
 
+dotnet_diagnostic.IDE0011.severity = error
+
 # Do not allow unused usings
 dotnet_diagnostic.IDE0005.severity = error
 dotnet_remove_unnecessary_imports_on_save = true
