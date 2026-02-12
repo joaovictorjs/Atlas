@@ -46,7 +46,9 @@ public partial class Article : BaseEntity
     public void Publish()
     {
         if (Status == ArticleStatus.Published)
+        {
             return;
+        }
 
         Status = ArticleStatus.Published;
         PublishedAt = DateTime.UtcNow;
@@ -56,7 +58,9 @@ public partial class Article : BaseEntity
     public void RevertToDraft()
     {
         if (Status == ArticleStatus.Draft)
+        {
             return;
+        }
 
         Status = ArticleStatus.Draft;
         PublishedAt = null;
@@ -66,7 +70,9 @@ public partial class Article : BaseEntity
     public void Archive()
     {
         if (Status == ArticleStatus.Archived)
+        {
             return;
+        }
 
         Status = ArticleStatus.Archived;
         PublishedAt = null;
@@ -87,7 +93,9 @@ public partial class Article : BaseEntity
         foreach (var c in slug)
         {
             if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            {
                 strBuilder.Append(c);
+            }
         }
 
         slug = strBuilder.ToString().Normalize(NormalizationForm.FormC);
@@ -100,13 +108,17 @@ public partial class Article : BaseEntity
     private static void ValidateTitle(string title)
     {
         if (string.IsNullOrWhiteSpace(title))
+        {
             throw new ArgumentException("Title cannot be null or white space.", nameof(title));
+        }
     }
 
     private static void ValidateContent(string content)
     {
         if (string.IsNullOrWhiteSpace(content))
+        {
             throw new ArgumentException("Content cannot be null or white space.", nameof(content));
+        }
     }
 
     [GeneratedRegex("[^a-z0-9-]")]
