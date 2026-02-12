@@ -2,19 +2,19 @@ namespace Atlas.Domain.Entities;
 
 public abstract class BaseEntity
 {
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
 
     public DateTime UpdatedAt { get; private set; }
 
-    public void SetCreated()
+    protected BaseEntity()
     {
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void SetUpdated()
+    public void MarkAsUpdated()
     {
         UpdatedAt = DateTime.UtcNow;
     }
