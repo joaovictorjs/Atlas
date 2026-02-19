@@ -1,3 +1,4 @@
+using Atlas.API.Extensions;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,14 +19,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-const string DefaultCulture = "en";
-var supportedCultures = new[] { "en", "pt" };
-var localizationOptions = new RequestLocalizationOptions()
-    .SetDefaultCulture(DefaultCulture)
-    .AddSupportedCultures(supportedCultures)
-    .AddSupportedUICultures(supportedCultures);
-
-app.UseRequestLocalization(localizationOptions);
 app.UseHttpsRedirection();
+app.UseLocalization();
 app.MapControllers();
 app.Run();
