@@ -110,7 +110,10 @@ public partial class Article : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(title))
         {
-            throw new ArgumentException(ExceptionMessages.TitleCantBeNullOrWhiteSpace, nameof(title));
+            throw new ArgumentException(
+                ExceptionMessages.TitleCantBeNullOrWhiteSpace,
+                nameof(title)
+            );
         }
     }
 
@@ -118,7 +121,10 @@ public partial class Article : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(content))
         {
-            throw new ArgumentException(ExceptionMessages.ContentCantBeNullOrWhiteSpace, nameof(content));
+            throw new ArgumentException(
+                ExceptionMessages.ContentCantBeNullOrWhiteSpace,
+                nameof(content)
+            );
         }
     }
 
