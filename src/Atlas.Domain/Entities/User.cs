@@ -1,5 +1,6 @@
 using System.Net.Mail;
 using Atlas.Domain.Enums;
+using Atlas.Exceptions.Resources;
 
 namespace Atlas.Domain.Entities;
 
@@ -84,14 +85,14 @@ public class User : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentException("Name cannot be null or white space.", nameof(name));
+            throw new ArgumentException(ExceptionMessages.NameCantBeNullOrWhiteSpace, nameof(name));
         }
 
         const int MinLength = 4;
         if (name.Length < MinLength)
         {
             throw new ArgumentException(
-                $"Name must be at least {MinLength} characters long.",
+                string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, MinLength),
                 nameof(name)
             );
         }
@@ -100,7 +101,7 @@ public class User : BaseEntity
         if (name.Length > MaxLength)
         {
             throw new ArgumentException(
-                $"Name cannot exceed {MaxLength} characters.",
+                string.Format(ExceptionMessages.NameCantExceedXCharacters),
                 nameof(name)
             );
         }
@@ -111,7 +112,7 @@ public class User : BaseEntity
         if (string.IsNullOrWhiteSpace(photoUrl))
         {
             throw new ArgumentException(
-                "Photo URL cannot be null or white space.",
+                ExceptionMessages.PhotoUrlCantBeNullOrWhiteSpace,
                 nameof(photoUrl)
             );
         }
@@ -120,7 +121,7 @@ public class User : BaseEntity
         if (photoUrl.Length > MaxLenght)
         {
             throw new ArgumentException(
-                $"Photo URL cannot exceed {MaxLenght} characters.",
+                string.Format(ExceptionMessages.PhotoUrlCantExceedXCharacters, MaxLenght),
                 nameof(photoUrl)
             );
         }
@@ -131,7 +132,7 @@ public class User : BaseEntity
         )
         {
             throw new ArgumentException(
-                "Photo URL must be a valid HTTP or HTTPS URL.",
+                ExceptionMessages.PhotoUrlMustBeValidHttpOrHttps,
                 nameof(photoUrl)
             );
         }
@@ -141,21 +142,27 @@ public class User : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(email))
         {
-            throw new ArgumentException("Email cannot be null or white space.", nameof(email));
+            throw new ArgumentException(
+                ExceptionMessages.EmailCantBeNullOrWhiteSpace,
+                nameof(email)
+            );
         }
 
         const int MaxLength = 255;
         if (email.Length > MaxLength)
         {
             throw new ArgumentException(
-                $"Email cannot exceed {MaxLength} characters.",
+                string.Format(ExceptionMessages.EmailCantExceedXCharacters, MaxLength),
                 nameof(email)
             );
         }
 
         if (!MailAddress.TryCreate(email, out var _))
         {
-            throw new ArgumentException("Invalid email address.", nameof(email));
+            throw new ArgumentException(
+                ExceptionMessages.EmailMustBeValidEmailAddress,
+                nameof(email)
+            );
         }
     }
 
@@ -164,7 +171,7 @@ public class User : BaseEntity
         if (string.IsNullOrWhiteSpace(passwordHash))
         {
             throw new ArgumentException(
-                "Password hash cannot be null or white space.",
+                ExceptionMessages.PasswordHashCantBeNullOrWhiteSpace,
                 nameof(passwordHash)
             );
         }

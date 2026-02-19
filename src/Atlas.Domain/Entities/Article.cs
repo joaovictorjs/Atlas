@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Atlas.Domain.Enums;
+using Atlas.Exceptions.Resources;
 
 namespace Atlas.Domain.Entities;
 
@@ -109,7 +110,7 @@ public partial class Article : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(title))
         {
-            throw new ArgumentException("Title cannot be null or white space.", nameof(title));
+            throw new ArgumentException(ExceptionMessages.TitleCantBeNullOrWhiteSpace, nameof(title));
         }
     }
 
@@ -117,7 +118,7 @@ public partial class Article : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(content))
         {
-            throw new ArgumentException("Content cannot be null or white space.", nameof(content));
+            throw new ArgumentException(ExceptionMessages.ContentCantBeNullOrWhiteSpace, nameof(content));
         }
     }
 

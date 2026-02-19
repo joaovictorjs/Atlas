@@ -1,3 +1,5 @@
+using Atlas.Exceptions.Resources;
+
 namespace Atlas.Domain.Entities;
 
 public class Tag : BaseEntity
@@ -23,14 +25,14 @@ public class Tag : BaseEntity
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentException("Name cannot be null or white space.", nameof(name));
+            throw new ArgumentException(ExceptionMessages.NameCantBeNullOrWhiteSpace, nameof(name));
         }
 
         const int MinLength = 4;
         if (name.Length < MinLength)
         {
             throw new ArgumentException(
-                $"Name must be at least {MinLength} characters long.",
+                string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, MinLength),
                 nameof(name)
             );
         }
@@ -39,7 +41,7 @@ public class Tag : BaseEntity
         if (name.Length > MaxLength)
         {
             throw new ArgumentException(
-                $"Name cannot exceed {MaxLength} characters.",
+                string.Format(ExceptionMessages.NameCantExceedXCharacters),
                 nameof(name)
             );
         }

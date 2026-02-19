@@ -8,4 +8,7 @@
     <Folder Include="Entities\" />
     <Folder Include="Enums\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Atlas.Exceptions\Atlas.Exceptions.csproj" />
+  </ItemGroup>
 </Project>
