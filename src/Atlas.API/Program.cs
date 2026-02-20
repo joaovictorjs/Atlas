@@ -1,8 +1,19 @@
 using Atlas.API.Extensions;
+using Atlas.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi().AddControllers();
+builder.Services.AddDbContext<AtlasDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("Default");
+    if (string.IsNullOrWhiteSpace(connectionString))
+    {
+        throw new InvalidOperationException("ConnectionStrings:Default is not configured.");
+    }
+    options.UseNpgsql(connectionString);
+});
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -17,6 +28,12 @@ if (app.Environment.IsDevelopment())
             .SortOperationsByMethod()
             .PreserveSchemaPropertyOrder();
     });
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    using var context = scope.ServiceProvider.GetService<AtlasDbContext>();
+    context?.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
