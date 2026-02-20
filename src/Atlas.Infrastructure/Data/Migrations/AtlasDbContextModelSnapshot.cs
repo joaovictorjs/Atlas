@@ -3,20 +3,17 @@ using System;
 using Atlas.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Atlas.Infrastructure.Migrations
+namespace Atlas.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AtlasDbContext))]
-    [Migration("20260220231617_CreateUsersTable")]
-    partial class CreateUsersTable
+    partial class AtlasDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
