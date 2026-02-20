@@ -12,7 +12,7 @@ builder.Services.AddDbContext<AtlasDbContext>(options =>
     {
         throw new InvalidOperationException("ConnectionStrings:Default is not configured.");
     }
-    options.UseNpgsql(connectionString);
+    options.UseNpgsql(connectionString, pgOptions => pgOptions.SetPostgresVersion(9, 5));
 });
 
 var app = builder.Build();

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Atlas.Infrastructure.Data.Migrations
+namespace Atlas.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class CreateUsersTable : Migration
@@ -17,7 +17,7 @@ namespace Atlas.Infrastructure.Data.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     photo_url = table.Column<string>(type: "character varying(2048)", maxLength: 2048, nullable: false),
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
