@@ -6,6 +6,11 @@ namespace Atlas.Domain.Entities;
 
 public class User : BaseEntity
 {
+    public const int NameMinLength = 4;
+    public const int NameMaxLength = 100;
+    public const int PhotoUrlMaxLength = 2048;
+    public const int EmailMaxLength = 255;
+
     public string Name { get; private set; } = string.Empty;
     public string PhotoUrl { get; private set; } = string.Empty;
     public string Email { get; private set; } = string.Empty;
@@ -88,20 +93,18 @@ public class User : BaseEntity
             throw new ArgumentException(ExceptionMessages.NameCantBeNullOrWhiteSpace, nameof(name));
         }
 
-        const int MinLength = 4;
-        if (name.Length < MinLength)
+        if (name.Length < NameMinLength)
         {
             throw new ArgumentException(
-                string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, MinLength),
+                string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, NameMinLength),
                 nameof(name)
             );
         }
 
-        const int MaxLength = 100;
-        if (name.Length > MaxLength)
+        if (name.Length > NameMaxLength)
         {
             throw new ArgumentException(
-                string.Format(ExceptionMessages.NameCantExceedXCharacters),
+                string.Format(ExceptionMessages.NameCantExceedXCharacters, NameMaxLength),
                 nameof(name)
             );
         }
@@ -117,11 +120,10 @@ public class User : BaseEntity
             );
         }
 
-        const int MaxLenght = 2048;
-        if (photoUrl.Length > MaxLenght)
+        if (photoUrl.Length > PhotoUrlMaxLength)
         {
             throw new ArgumentException(
-                string.Format(ExceptionMessages.PhotoUrlCantExceedXCharacters, MaxLenght),
+                string.Format(ExceptionMessages.PhotoUrlCantExceedXCharacters, PhotoUrlMaxLength),
                 nameof(photoUrl)
             );
         }
@@ -148,11 +150,10 @@ public class User : BaseEntity
             );
         }
 
-        const int MaxLength = 255;
-        if (email.Length > MaxLength)
+        if (email.Length > EmailMaxLength)
         {
             throw new ArgumentException(
-                string.Format(ExceptionMessages.EmailCantExceedXCharacters, MaxLength),
+                string.Format(ExceptionMessages.EmailCantExceedXCharacters, EmailMaxLength),
                 nameof(email)
             );
         }
