@@ -167,5 +167,23 @@ namespace Atlas.Exceptions.Resources {
                 return ResourceManager.GetString("TitleCantBeNullOrWhiteSpace", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The title can&apos;t exceed {} characters..
+        /// </summary>
+        public static string TitleCantExceedXCharacters {
+            get {
+                return ResourceManager.GetString("TitleCantExceedXCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The title must be at least {} characters long..
+        /// </summary>
+        public static string TitleMustBeAtLeastXCharactersLong {
+            get {
+                return ResourceManager.GetString("TitleMustBeAtLeastXCharactersLong", resourceCulture);
+            }
+        }
     }
 }

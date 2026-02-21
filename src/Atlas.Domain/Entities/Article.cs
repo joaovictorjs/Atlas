@@ -111,6 +111,22 @@ public partial class Article : BaseEntity
                 nameof(title)
             );
         }
+
+        if (title.Length < TitleMinLength)
+        {
+            throw new ArgumentException(
+                string.Format(ExceptionMessages.TitleMustBeAtLeastXCharactersLong, TitleMinLength),
+                nameof(title)
+            );
+        }
+
+        if (title.Length > TitleMaxLength)
+        {
+            throw new ArgumentException(
+                string.Format(ExceptionMessages.TitleCantExceedXCharacters, TitleMaxLength),
+                nameof(title)
+            );
+        }
     }
 
     private static void ValidateContent(string content)

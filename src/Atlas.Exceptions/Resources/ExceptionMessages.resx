@@ -132,6 +132,9 @@
   <data name="NameCantExceedXCharacters" xml:space="preserve">
     <value>The name can't exceed {} characters.</value>
   </data>
+  <data name="TitleCantExceedXCharacters" xml:space="preserve">
+    <value>The title can't exceed {} characters.</value>
+  </data>
   <data name="EmailCantExceedXCharacters" xml:space="preserve">
     <value>The email can't exceed {} characters.</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="NameMustBeAtLeastXCharactersLong" xml:space="preserve">
     <value>The name must be at least {} characters long.</value>
+  </data>
+  <data name="TitleMustBeAtLeastXCharactersLong" xml:space="preserve">
+    <value>The title must be at least {} characters long.</value>
   </data>
   <data name="PhotoUrlCantBeNullOrWhiteSpace" xml:space="preserve">
     <value>The photo url can't be null or white space.</value>

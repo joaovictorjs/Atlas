@@ -11,7 +11,13 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
         {
             builder.ToTable("articles").HasKey(article => article.Id);
             builder.Property(article => article.Id).HasColumnName("id");
-            builder.Property(article => article.Title).HasColumnName("title").IsRequired();
+
+            builder
+                .Property(article => article.Title)
+                .HasColumnName("title")
+                .IsRequired()
+                .HasMaxLength(Article.TitleMaxLength);
+
             builder.Property(article => article.Slug).HasColumnName("slug").IsRequired();
             builder.Property(article => article.Content).HasColumnName("content").IsRequired();
 
