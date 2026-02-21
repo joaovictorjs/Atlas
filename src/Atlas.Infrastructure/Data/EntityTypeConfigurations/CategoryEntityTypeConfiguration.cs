@@ -11,6 +11,7 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
             builder.ToTable("categories");
             builder.HasKey(category => category.Id);
             builder.Property(category => category.Id).HasColumnName("id");
+            builder.Property(category => category.CreatorId).HasColumnName("creator_id");
 
             builder
                 .Property(category => category.Name)
@@ -29,6 +30,12 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
                 .HasColumnName("updated_at");
 
             builder.HasIndex(category => category.Name).IsUnique();
+
+            builder
+                .HasOne(category => category.Creator)
+                .WithMany(user => user.CreatedCategories)
+                .HasForeignKey(category => category.CreatorId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

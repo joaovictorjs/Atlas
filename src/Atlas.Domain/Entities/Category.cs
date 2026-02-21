@@ -7,12 +7,20 @@ public class Category : BaseEntity
     public const int NameMinLength = 4;
     public const int NameMaxLength = 100;
 
+    public int CreatorId { get; private set; }
     public string Name { get; private set; } = string.Empty;
 
-    public Category(string name)
+    // Navigation
+    public User Creator { get; private set; } = null!;
+
+    public Category(string name, User creator)
     {
         ValidateName(name);
+        ValidateCreator(creator);
+
         Name = name;
+        Creator = creator;
+        CreatorId = Creator.Id;
     }
 
     private Category() { }
@@ -46,5 +54,10 @@ public class Category : BaseEntity
                 nameof(name)
             );
         }
+    }
+
+    private void ValidateCreator(User creator)
+    {
+        ArgumentNullException.ThrowIfNull(creator, nameof(creator));
     }
 }
