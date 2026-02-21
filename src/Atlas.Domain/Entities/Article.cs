@@ -11,17 +11,26 @@ public partial class Article : BaseEntity
     public const int TitleMinLength = 4;
     public const int TitleMaxLength = 255;
 
+    public int CreatorId { get; private set; }
+    public int? PublisherId { get; private set; }  
     public string Title { get; private set; } = string.Empty;
     public string Slug { get; private set; } = string.Empty;
     public string Content { get; private set; } = string.Empty;
     public ArticleStatus Status { get; private set; }
     public DateTime? PublishedAt { get; private set; }
 
-    public Article(string title, string content)
+    // Navigation
+    public User Creator { get; private set; } = null!;
+    public User? Publisher { get; private set; }
+
+    public Article(string title, string content, User creator)
     {
         ValidateTitle(title);
         ValidateContent(content);
+        ValidateCreator(creator);
 
+        Creator = creator;
+        CreatorId = Creator.Id;
         Title = title;
         Slug = GenerateSlug(title);
         Content = content;
@@ -49,14 +58,17 @@ public partial class Article : BaseEntity
         MarkAsUpdated();
     }
 
-    public void Publish()
+    public void Publish(User publisher)
     {
         if (Status == ArticleStatus.Published)
         {
             return;
         }
+        ValidatePublisher(publisher);
 
         Status = ArticleStatus.Published;
+        Publisher = publisher;
+        PublisherId = publisher.Id;
         PublishedAt = DateTime.UtcNow;
         MarkAsUpdated();
     }
@@ -69,6 +81,8 @@ public partial class Article : BaseEntity
         }
 
         Status = ArticleStatus.Draft;
+        Publisher = null;
+        PublisherId = null;
         PublishedAt = null;
         MarkAsUpdated();
     }
@@ -144,6 +158,16 @@ public partial class Article : BaseEntity
                 nameof(content)
             );
         }
+    }
+
+    private void ValidateCreator(User creator)
+    {
+        ArgumentNullException.ThrowIfNull(creator, nameof(creator));
+    }
+
+    private void ValidatePublisher(User publisher)
+    {
+        ArgumentNullException.ThrowIfNull(publisher, nameof(publisher));
     }
 
     [GeneratedRegex("[^a-z0-9-]")]

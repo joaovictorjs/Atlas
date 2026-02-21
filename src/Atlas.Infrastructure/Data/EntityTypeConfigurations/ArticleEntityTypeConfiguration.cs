@@ -11,6 +11,8 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
         {
             builder.ToTable("articles").HasKey(article => article.Id);
             builder.Property(article => article.Id).HasColumnName("id");
+            builder.Property(article => article.CreatorId).HasColumnName("creator_id").IsRequired();
+            builder.Property(article => article.PublisherId).HasColumnName("publisher_id");
 
             builder
                 .Property(article => article.Title)
@@ -37,6 +39,18 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
 
             builder.Property(article => article.CreatedAt).HasColumnName("created_at").IsRequired();
             builder.Property(article => article.UpdatedAt).HasColumnName("updated_at").IsRequired();
+
+            builder
+                .HasOne(article => article.Creator)
+                .WithMany(user => user.CreatedArticles)
+                .HasForeignKey(article => article.CreatorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(article => article.Publisher)
+                .WithMany(user => user.PublishedArticles)
+                .HasForeignKey(article => article.PublisherId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

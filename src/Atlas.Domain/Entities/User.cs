@@ -20,6 +20,8 @@ public class User : BaseEntity
     // Navigation
     public ICollection<Tag> CreatedTags { get; private set; } = [];
     public ICollection<Category> CreatedCategories { get; private set; } = [];
+    public ICollection<Article> CreatedArticles { get; private set; } = [];
+    public ICollection<Article> PublishedArticles { get; private set; } = [];
 
     public User(string name, string photoUrl, string email, string passwordHash)
     {
