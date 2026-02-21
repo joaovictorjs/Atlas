@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -14,25 +14,23 @@ namespace Atlas.Infrastructure.Data.Migrations
                 name: "IX_tags_name",
                 table: "tags",
                 column: "name",
-                unique: true);
+                unique: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_categories_name",
                 table: "categories",
                 column: "name",
-                unique: true);
+                unique: true
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropIndex(
-                name: "IX_tags_name",
-                table: "tags");
+            migrationBuilder.DropIndex(name: "IX_tags_name", table: "tags");
 
-            migrationBuilder.DropIndex(
-                name: "IX_categories_name",
-                table: "categories");
+            migrationBuilder.DropIndex(name: "IX_categories_name", table: "categories");
         }
     }
 }

@@ -4,7 +4,6 @@ namespace Atlas.Domain.Entities;
 
 public class Category : BaseEntity
 {
-
     public const int NameMinLength = 4;
     public const int NameMaxLength = 100;
 
