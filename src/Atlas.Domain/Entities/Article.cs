@@ -1,13 +1,16 @@
+using Atlas.Domain.Enums;
+using Atlas.Exceptions.Resources;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using Atlas.Domain.Enums;
-using Atlas.Exceptions.Resources;
 
 namespace Atlas.Domain.Entities;
 
 public partial class Article : BaseEntity
 {
+    public const int TitleMinLength = 4;
+    public const int TitleMaxLength = 255;
+
     public string Title { get; private set; } = string.Empty;
     public string Slug { get; private set; } = string.Empty;
     public string Content { get; private set; } = string.Empty;
@@ -30,6 +33,8 @@ public partial class Article : BaseEntity
     public void ChangeTitle(string title)
     {
         ValidateTitle(title);
+
+        RevertToDraft();
         Title = title;
         Slug = GenerateSlug(title);
         MarkAsUpdated();
@@ -38,6 +43,8 @@ public partial class Article : BaseEntity
     public void ChangeContent(string content)
     {
         ValidateContent(content);
+
+        RevertToDraft();
         Content = content;
         MarkAsUpdated();
     }
