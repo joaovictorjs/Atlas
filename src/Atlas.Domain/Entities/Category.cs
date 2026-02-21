@@ -4,10 +4,11 @@ namespace Atlas.Domain.Entities;
 
 public class Category : BaseEntity
 {
-    public string Name { get; private set; } = string.Empty;
 
     public const int NameMinLength = 4;
     public const int NameMaxLength = 100;
+
+    public string Name { get; private set; } = string.Empty;
 
     public Category(string name)
     {
@@ -15,14 +16,14 @@ public class Category : BaseEntity
         Name = name;
     }
 
+    private Category() { }
+
     public void ChangeName(string name)
     {
         ValidateName(name);
         Name = name;
         MarkAsUpdated();
     }
-
-    private Category() { }
 
     private void ValidateName(string name)
     {

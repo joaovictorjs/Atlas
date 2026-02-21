@@ -31,6 +31,8 @@ public class User : BaseEntity
         Role = UserRole.Reader;
     }
 
+    private User() { }
+
     public void ChangeName(string name)
     {
         ValidateName(name);
@@ -177,6 +179,4 @@ public class User : BaseEntity
             );
         }
     }
-
-    private User() { }
 }

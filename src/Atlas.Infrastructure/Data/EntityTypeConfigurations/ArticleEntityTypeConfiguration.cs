@@ -14,6 +14,7 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
             builder.Property(article => article.Title).HasColumnName("title").IsRequired();
             builder.Property(article => article.Slug).HasColumnName("slug").IsRequired();
             builder.Property(article => article.Content).HasColumnName("content").IsRequired();
+
             builder
                 .Property(article => article.Status)
                 .HasColumnName("status")
@@ -22,10 +23,12 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
                     statusEnum => statusEnum.ToString(),
                     str => Enum.Parse<ArticleStatus>(str)
                 );
+
             builder
                 .Property(article => article.PublishedAt)
                 .HasColumnName("published_at")
                 .IsRequired();
+
             builder.Property(article => article.CreatedAt).HasColumnName("created_at").IsRequired();
             builder.Property(article => article.UpdatedAt).HasColumnName("updated_at").IsRequired();
         }

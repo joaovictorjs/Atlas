@@ -15,14 +15,14 @@ public class Tag : BaseEntity
         Name = name;
     }
 
+    private Tag() { }
+
     public void ChangeName(string name)
     {
         ValidateName(name);
         Name = name;
         MarkAsUpdated();
     }
-
-    private Tag() { }
 
     private void ValidateName(string name)
     {

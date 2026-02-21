@@ -11,14 +11,22 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
             builder.ToTable("categories");
             builder.HasKey(category => category.Id);
             builder.Property(category => category.Id).HasColumnName("id");
+
             builder
                 .Property(category => category.Name)
                 .IsRequired()
                 .HasMaxLength(Category.NameMaxLength)
                 .HasColumnName("name");
-            builder.Property(category => category.CreatedAt).IsRequired().HasColumnName("created_at");
-            builder.Property(category => category.UpdatedAt).IsRequired().HasColumnName("updated_at");
 
+            builder
+                .Property(category => category.CreatedAt)
+                .IsRequired()
+                .HasColumnName("created_at");
+
+            builder
+                .Property(category => category.UpdatedAt)
+                .IsRequired()
+                .HasColumnName("updated_at");
         }
     }
 }

@@ -9,13 +9,9 @@ namespace Atlas.Domain.Entities;
 public partial class Article : BaseEntity
 {
     public string Title { get; private set; } = string.Empty;
-
     public string Slug { get; private set; } = string.Empty;
-
     public string Content { get; private set; } = string.Empty;
-
     public ArticleStatus Status { get; private set; }
-
     public DateTime? PublishedAt { get; private set; }
 
     public Article(string title, string content)
@@ -28,6 +24,8 @@ public partial class Article : BaseEntity
         Content = content;
         Status = ArticleStatus.Draft;
     }
+
+    private Article() { }
 
     public void ChangeTitle(string title)
     {
@@ -79,8 +77,6 @@ public partial class Article : BaseEntity
         PublishedAt = null;
         MarkAsUpdated();
     }
-
-    private Article() { }
 
     private static string GenerateSlug(string title)
     {
