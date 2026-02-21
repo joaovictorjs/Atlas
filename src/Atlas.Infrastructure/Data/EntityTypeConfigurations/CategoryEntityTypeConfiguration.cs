@@ -27,6 +27,8 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
                 .Property(category => category.UpdatedAt)
                 .IsRequired()
                 .HasColumnName("updated_at");
+
+            builder.HasIndex(category => category.Name).IsUnique();
         }
     }
 }

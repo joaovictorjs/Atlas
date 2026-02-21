@@ -18,6 +18,7 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
                 .HasMaxLength(Tag.NameMaxLength)
                 .HasColumnName("name");
 
+            builder.HasIndex(tag => tag.Name).IsUnique();
             builder.Property(tag => tag.CreatedAt).IsRequired().HasColumnName("created_at");
             builder.Property(tag => tag.UpdatedAt).IsRequired().HasColumnName("updated_at");
         }
