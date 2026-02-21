@@ -17,6 +17,9 @@ public class User : BaseEntity
     public string PasswordHash { get; private set; } = string.Empty;
     public UserRole Role { get; private set; }
 
+    // Navigation
+    public ICollection<Tag> CreatedTags { get; private set; } = [];
+
     public User(string name, string photoUrl, string email, string passwordHash)
     {
         ValidateName(name);

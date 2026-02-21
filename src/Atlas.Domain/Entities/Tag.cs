@@ -7,12 +7,20 @@ public class Tag : BaseEntity
     public const int NameMinLength = 4;
     public const int NameMaxLength = 100;
 
+    public int CreatorId { get; private set; }  
     public string Name { get; private set; } = string.Empty;
 
-    public Tag(string name)
+    // Navigation
+    public User Creator { get; private set; } = null!;
+
+    public Tag(string name, User creator)
     {
         ValidateName(name);
+        ValidateCreator(creator);
+
         Name = name;
+        Creator = creator;
+        CreatorId = Creator.Id; 
     }
 
     private Tag() { }
@@ -46,5 +54,10 @@ public class Tag : BaseEntity
                 nameof(name)
             );
         }
+    }
+
+    private void ValidateCreator(User creator)
+    {
+        ArgumentNullException.ThrowIfNull(creator, nameof(creator));
     }
 }
