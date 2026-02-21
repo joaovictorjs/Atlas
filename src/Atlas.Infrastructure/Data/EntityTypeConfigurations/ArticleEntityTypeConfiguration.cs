@@ -13,6 +13,7 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
             builder.Property(article => article.Id).HasColumnName("id");
             builder.Property(article => article.CreatorId).HasColumnName("creator_id").IsRequired();
             builder.Property(article => article.PublisherId).HasColumnName("publisher_id");
+            builder.Property(article => article.CategoryId).HasColumnName("category_id");
 
             builder
                 .Property(article => article.Title)
@@ -50,6 +51,12 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
                 .HasOne(article => article.Publisher)
                 .WithMany(user => user.PublishedArticles)
                 .HasForeignKey(article => article.PublisherId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(article => article.Category)
+                .WithMany(category => category.Articles)
+                .HasForeignKey(article => article.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

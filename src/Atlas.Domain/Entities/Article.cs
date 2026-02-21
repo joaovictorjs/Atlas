@@ -13,6 +13,7 @@ public partial class Article : BaseEntity
 
     public int CreatorId { get; private set; }
     public int? PublisherId { get; private set; }  
+    public int CategoryId { get; private set; }
     public string Title { get; private set; } = string.Empty;
     public string Slug { get; private set; } = string.Empty;
     public string Content { get; private set; } = string.Empty;
@@ -22,19 +23,23 @@ public partial class Article : BaseEntity
     // Navigation
     public User Creator { get; private set; } = null!;
     public User? Publisher { get; private set; }
+    public Category Category { get; private set; } = null!;
 
-    public Article(string title, string content, User creator)
+    public Article(string title, string content, User creator, Category category)
     {
         ValidateTitle(title);
         ValidateContent(content);
         ValidateCreator(creator);
+        ValidateCategory(category);
 
-        Creator = creator;
         CreatorId = Creator.Id;
+        CategoryId = Category.Id;
         Title = title;
         Slug = GenerateSlug(title);
         Content = content;
         Status = ArticleStatus.Draft;
+        Creator = creator;
+        Category = category;    
     }
 
     private Article() { }
@@ -55,6 +60,16 @@ public partial class Article : BaseEntity
 
         RevertToDraft();
         Content = content;
+        MarkAsUpdated();
+    }
+
+    public void ChangeCategory(Category category)
+    {
+        ValidateCategory(category);
+
+        RevertToDraft();
+        CategoryId = category.Id;
+        Category = category;
         MarkAsUpdated();
     }
 
@@ -168,6 +183,11 @@ public partial class Article : BaseEntity
     private void ValidatePublisher(User publisher)
     {
         ArgumentNullException.ThrowIfNull(publisher, nameof(publisher));
+    }
+
+    private void ValidateCategory(Category category)
+    {
+        ArgumentNullException.ThrowIfNull(category, nameof(category));
     }
 
     [GeneratedRegex("[^a-z0-9-]")]

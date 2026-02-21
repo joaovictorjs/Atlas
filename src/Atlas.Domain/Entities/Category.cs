@@ -12,6 +12,7 @@ public class Category : BaseEntity
 
     // Navigation
     public User Creator { get; private set; } = null!;
+    public ICollection<Article> Articles { get; private set; } = [];
 
     public Category(string name, User creator)
     {
