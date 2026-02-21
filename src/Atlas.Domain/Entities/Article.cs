@@ -81,7 +81,6 @@ public partial class Article : BaseEntity
         }
 
         Status = ArticleStatus.Archived;
-        PublishedAt = null;
         MarkAsUpdated();
     }
 
