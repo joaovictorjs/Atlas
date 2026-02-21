@@ -8,7 +8,6 @@ public class Tag : BaseEntity
     public const int NameMaxLength = 100;
 
     public string Name { get; private set; } = string.Empty;
-   
 
     public Tag(string name)
     {

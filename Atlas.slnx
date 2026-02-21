@@ -2,7 +2,13 @@
   <Folder Name="/src/">
     <Project Path="src/Atlas.API/Atlas.API.csproj" />
     <Project Path="src/Atlas.Domain/Atlas.Domain.csproj" />
-    <Project Path="src/Atlas.Exceptions/Atlas.Exceptions.csproj" Id="98eb45df-3a49-4a97-85a3-e1b03fcb9dd3" />
-    <Project Path="src/Atlas.Infrastructure/Atlas.Infrastructure.csproj" Id="b10ab326-b18d-4040-bc6a-8901ad916d08" />
+    <Project
+      Path="src/Atlas.Exceptions/Atlas.Exceptions.csproj"
+      Id="98eb45df-3a49-4a97-85a3-e1b03fcb9dd3"
+    />
+    <Project
+      Path="src/Atlas.Infrastructure/Atlas.Infrastructure.csproj"
+      Id="b10ab326-b18d-4040-bc6a-8901ad916d08"
+    />
   </Folder>
 </Solution>
