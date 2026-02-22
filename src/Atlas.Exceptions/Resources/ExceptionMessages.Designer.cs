@@ -61,11 +61,38 @@ namespace Atlas.Exceptions.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The article can&apos;t be null..
+        /// </summary>
+        public static string ArticleCantBeNull {
+            get {
+                return ResourceManager.GetString("ArticleCantBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The category can&apos;t be null..
+        /// </summary>
+        public static string CategoryCantBeNull {
+            get {
+                return ResourceManager.GetString("CategoryCantBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The content can&apos;t be null or white space..
         /// </summary>
         public static string ContentCantBeNullOrWhiteSpace {
             get {
                 return ResourceManager.GetString("ContentCantBeNullOrWhiteSpace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The creator can&apos;t be null..
+        /// </summary>
+        public static string CreatorCantBeNull {
+            get {
+                return ResourceManager.GetString("CreatorCantBeNull", resourceCulture);
             }
         }
         
@@ -156,6 +183,24 @@ namespace Atlas.Exceptions.Resources {
         public static string PhotoUrlMustBeValidHttpOrHttps {
             get {
                 return ResourceManager.GetString("PhotoUrlMustBeValidHttpOrHttps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The publisher can&apos;t be null..
+        /// </summary>
+        public static string PublisherCantBeNull {
+            get {
+                return ResourceManager.GetString("PublisherCantBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tag can&apos;t be null..
+        /// </summary>
+        public static string TagCantBeNull {
+            get {
+                return ResourceManager.GetString("TagCantBeNull", resourceCulture);
             }
         }
         

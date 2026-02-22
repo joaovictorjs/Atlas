@@ -159,4 +159,19 @@
   <data name="EmailMustBeValidEmailAddress" xml:space="preserve">
     <value>The email must be a valid email address.</value>
   </data>
+  <data name="CreatorCantBeNull" xml:space="preserve">
+    <value>The creator can't be null.</value>
+  </data>
+  <data name="PublisherCantBeNull" xml:space="preserve">
+    <value>The publisher can't be null.</value>
+  </data>
+  <data name="TagCantBeNull" xml:space="preserve">
+    <value>The tag can't be null.</value>
+  </data>
+  <data name="ArticleCantBeNull" xml:space="preserve">
+    <value>The article can't be null.</value>
+  </data>
+  <data name="CategoryCantBeNull" xml:space="preserve">
+    <value>The category can't be null.</value>
+  </data>
 </root>

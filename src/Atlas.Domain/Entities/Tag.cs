@@ -1,3 +1,4 @@
+using Atlas.Exceptions;
 using Atlas.Exceptions.Resources;
 
 namespace Atlas.Domain.Entities;
@@ -29,36 +30,26 @@ public class Tag : BaseEntity
     public void ChangeName(string name)
     {
         ValidateName(name);
+
         Name = name;
         MarkAsUpdated();
     }
 
     private static void ValidateName(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(ExceptionMessages.NameCantBeNullOrWhiteSpace, nameof(name));
-        }
+        DomainException.ThrowIfNullOrWhiteSpace(name, ExceptionMessages.NameCantBeNullOrWhiteSpace);
 
-        if (name.Length < NameMinLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, NameMinLength),
-                nameof(name)
-            );
-        }
-
-        if (name.Length > NameMaxLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.NameCantExceedXCharacters, NameMaxLength),
-                nameof(name)
-            );
-        }
+        DomainException.ThrowIfOutOfRange(
+            name.Length,
+            NameMinLength,
+            NameMaxLength,
+            string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, NameMinLength),
+            string.Format(ExceptionMessages.NameCantExceedXCharacters, NameMaxLength)
+        );
     }
 
     private static void ValidateCreator(User creator)
     {
-        ArgumentNullException.ThrowIfNull(creator, nameof(creator));
+        DomainException.ThrowIfNull(creator, ExceptionMessages.CreatorCantBeNull);
     }
 }

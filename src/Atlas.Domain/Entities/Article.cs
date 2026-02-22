@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Atlas.Domain.Enums;
+using Atlas.Exceptions;
 using Atlas.Exceptions.Resources;
 
 namespace Atlas.Domain.Entities;
@@ -140,55 +141,41 @@ public partial class Article : BaseEntity
 
     private static void ValidateTitle(string title)
     {
-        if (string.IsNullOrWhiteSpace(title))
-        {
-            throw new ArgumentException(
-                ExceptionMessages.TitleCantBeNullOrWhiteSpace,
-                nameof(title)
-            );
-        }
+        DomainException.ThrowIfNullOrWhiteSpace(
+            title,
+            ExceptionMessages.TitleCantBeNullOrWhiteSpace
+        );
 
-        if (title.Length < TitleMinLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.TitleMustBeAtLeastXCharactersLong, TitleMinLength),
-                nameof(title)
-            );
-        }
-
-        if (title.Length > TitleMaxLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.TitleCantExceedXCharacters, TitleMaxLength),
-                nameof(title)
-            );
-        }
+        DomainException.ThrowIfOutOfRange(
+            title.Length,
+            TitleMinLength,
+            TitleMaxLength,
+            string.Format(ExceptionMessages.TitleMustBeAtLeastXCharactersLong, TitleMinLength),
+            string.Format(ExceptionMessages.TitleCantExceedXCharacters, TitleMaxLength)
+        );
     }
 
     private static void ValidateContent(string content)
     {
-        if (string.IsNullOrWhiteSpace(content))
-        {
-            throw new ArgumentException(
-                ExceptionMessages.ContentCantBeNullOrWhiteSpace,
-                nameof(content)
-            );
-        }
+        DomainException.ThrowIfNullOrWhiteSpace(
+            content,
+            ExceptionMessages.ContentCantBeNullOrWhiteSpace
+        );
     }
 
     private static void ValidateCreator(User creator)
     {
-        ArgumentNullException.ThrowIfNull(creator, nameof(creator));
+        DomainException.ThrowIfNull(creator, ExceptionMessages.CreatorCantBeNull);
     }
 
     private static void ValidatePublisher(User publisher)
     {
-        ArgumentNullException.ThrowIfNull(publisher, nameof(publisher));
+        DomainException.ThrowIfNull(publisher, ExceptionMessages.PublisherCantBeNull);
     }
 
     private static void ValidateCategory(Category category)
     {
-        ArgumentNullException.ThrowIfNull(category, nameof(category));
+        DomainException.ThrowIfNull(category, ExceptionMessages.CategoryCantBeNull);
     }
 
     [GeneratedRegex("[^a-z0-9-]")]

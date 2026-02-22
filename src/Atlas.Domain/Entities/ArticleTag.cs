@@ -1,3 +1,6 @@
+using Atlas.Exceptions;
+using Atlas.Exceptions.Resources;
+
 namespace Atlas.Domain.Entities
 {
     public class ArticleTag : BaseEntity
@@ -24,12 +27,12 @@ namespace Atlas.Domain.Entities
 
         private static void ValidateArticle(Article article)
         {
-            ArgumentNullException.ThrowIfNull(article, nameof(article));
+            DomainException.ThrowIfNull(article, ExceptionMessages.ArticleCantBeNull);
         }
 
         private static void ValidateTag(Tag tag)
         {
-            ArgumentNullException.ThrowIfNull(tag, nameof(tag));
+            DomainException.ThrowIfNull(tag, ExceptionMessages.TagCantBeNull);
         }
     }
 }

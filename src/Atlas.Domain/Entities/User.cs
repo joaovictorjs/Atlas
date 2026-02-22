@@ -1,5 +1,6 @@
 using System.Net.Mail;
 using Atlas.Domain.Enums;
+using Atlas.Exceptions;
 using Atlas.Exceptions.Resources;
 
 namespace Atlas.Domain.Entities;
@@ -42,6 +43,7 @@ public class User : BaseEntity
     public void ChangeName(string name)
     {
         ValidateName(name);
+
         Name = name;
         MarkAsUpdated();
     }
@@ -49,6 +51,7 @@ public class User : BaseEntity
     public void ChangePhotoUrl(string photoUrl)
     {
         ValidatePhotoUrl(photoUrl);
+
         PhotoUrl = photoUrl;
         MarkAsUpdated();
     }
@@ -56,6 +59,7 @@ public class User : BaseEntity
     public void ChangeEmail(string email)
     {
         ValidateEmail(email);
+
         Email = email;
         MarkAsUpdated();
     }
@@ -63,6 +67,7 @@ public class User : BaseEntity
     public void ChangePasswordHash(string passwordHash)
     {
         ValidatePasswordHash(passwordHash);
+
         PasswordHash = passwordHash;
         MarkAsUpdated();
     }
@@ -96,93 +101,63 @@ public class User : BaseEntity
 
     private static void ValidateName(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(ExceptionMessages.NameCantBeNullOrWhiteSpace, nameof(name));
-        }
+        DomainException.ThrowIfNullOrWhiteSpace(name, ExceptionMessages.NameCantBeNullOrWhiteSpace);
 
-        if (name.Length < NameMinLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, NameMinLength),
-                nameof(name)
-            );
-        }
-
-        if (name.Length > NameMaxLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.NameCantExceedXCharacters, NameMaxLength),
-                nameof(name)
-            );
-        }
+        DomainException.ThrowIfOutOfRange(
+            name.Length,
+            NameMinLength,
+            NameMaxLength,
+            string.Format(ExceptionMessages.NameMustBeAtLeastXCharactersLong, NameMinLength),
+            string.Format(ExceptionMessages.NameCantExceedXCharacters, NameMaxLength)
+        );
     }
 
     private static void ValidatePhotoUrl(string photoUrl)
     {
-        if (string.IsNullOrWhiteSpace(photoUrl))
-        {
-            throw new ArgumentException(
-                ExceptionMessages.PhotoUrlCantBeNullOrWhiteSpace,
-                nameof(photoUrl)
-            );
-        }
+        DomainException.ThrowIfNullOrWhiteSpace(
+            photoUrl,
+            ExceptionMessages.PhotoUrlCantBeNullOrWhiteSpace
+        );
 
-        if (photoUrl.Length > PhotoUrlMaxLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.PhotoUrlCantExceedXCharacters, PhotoUrlMaxLength),
-                nameof(photoUrl)
-            );
-        }
+        DomainException.ThrowIfGreaterThan(
+            photoUrl.Length,
+            PhotoUrlMaxLength,
+            string.Format(ExceptionMessages.PhotoUrlCantExceedXCharacters, PhotoUrlMaxLength)
+        );
 
         if (
             !Uri.TryCreate(photoUrl, UriKind.Absolute, out var uri)
             || (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps)
         )
         {
-            throw new ArgumentException(
-                ExceptionMessages.PhotoUrlMustBeValidHttpOrHttps,
-                nameof(photoUrl)
-            );
+            throw new DomainException(ExceptionMessages.PhotoUrlMustBeValidHttpOrHttps);
         }
     }
 
     private static void ValidateEmail(string email)
     {
-        if (string.IsNullOrWhiteSpace(email))
-        {
-            throw new ArgumentException(
-                ExceptionMessages.EmailCantBeNullOrWhiteSpace,
-                nameof(email)
-            );
-        }
+        DomainException.ThrowIfNullOrWhiteSpace(
+            email,
+            ExceptionMessages.EmailCantBeNullOrWhiteSpace
+        );
 
-        if (email.Length > EmailMaxLength)
-        {
-            throw new ArgumentException(
-                string.Format(ExceptionMessages.EmailCantExceedXCharacters, EmailMaxLength),
-                nameof(email)
-            );
-        }
+        DomainException.ThrowIfGreaterThan(
+            email.Length,
+            EmailMaxLength,
+            string.Format(ExceptionMessages.EmailCantExceedXCharacters, EmailMaxLength)
+        );
 
         if (!MailAddress.TryCreate(email, out var _))
         {
-            throw new ArgumentException(
-                ExceptionMessages.EmailMustBeValidEmailAddress,
-                nameof(email)
-            );
+            throw new DomainException(ExceptionMessages.EmailMustBeValidEmailAddress);
         }
     }
 
     private static void ValidatePasswordHash(string passwordHash)
     {
-        if (string.IsNullOrWhiteSpace(passwordHash))
-        {
-            throw new ArgumentException(
-                ExceptionMessages.PasswordHashCantBeNullOrWhiteSpace,
-                nameof(passwordHash)
-            );
-        }
+        DomainException.ThrowIfNullOrWhiteSpace(
+            passwordHash,
+            ExceptionMessages.PasswordHashCantBeNullOrWhiteSpace
+        );
     }
 }
