@@ -7,13 +7,12 @@ public class Tag : BaseEntity
     public const int NameMinLength = 4;
     public const int NameMaxLength = 100;
 
-    public int CreatorId { get; private set; }  
+    public int CreatorId { get; private set; }
     public string Name { get; private set; } = string.Empty;
 
     // Navigation
     public User Creator { get; private set; } = null!;
     public ICollection<ArticleTag> ArticleTags { get; private set; } = null!;
-
 
     public Tag(string name, User creator)
     {
@@ -22,7 +21,7 @@ public class Tag : BaseEntity
 
         Name = name;
         Creator = creator;
-        CreatorId = Creator.Id; 
+        CreatorId = Creator.Id;
     }
 
     private Tag() { }
@@ -34,7 +33,7 @@ public class Tag : BaseEntity
         MarkAsUpdated();
     }
 
-    private void ValidateName(string name)
+    private static void ValidateName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -58,7 +57,7 @@ public class Tag : BaseEntity
         }
     }
 
-    private void ValidateCreator(User creator)
+    private static void ValidateCreator(User creator)
     {
         ArgumentNullException.ThrowIfNull(creator, nameof(creator));
     }

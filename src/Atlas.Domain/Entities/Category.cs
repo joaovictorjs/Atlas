@@ -33,7 +33,7 @@ public class Category : BaseEntity
         MarkAsUpdated();
     }
 
-    private void ValidateName(string name)
+    private static void ValidateName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -57,7 +57,7 @@ public class Category : BaseEntity
         }
     }
 
-    private void ValidateCreator(User creator)
+    private static void ValidateCreator(User creator)
     {
         ArgumentNullException.ThrowIfNull(creator, nameof(creator));
     }

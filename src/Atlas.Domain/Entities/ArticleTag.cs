@@ -22,12 +22,12 @@ namespace Atlas.Domain.Entities
 
         private ArticleTag() { }
 
-        private void ValidateArticle(Article article)
+        private static void ValidateArticle(Article article)
         {
             ArgumentNullException.ThrowIfNull(article, nameof(article));
         }
 
-        private void ValidateTag(Tag tag)
+        private static void ValidateTag(Tag tag)
         {
             ArgumentNullException.ThrowIfNull(tag, nameof(tag));
         }

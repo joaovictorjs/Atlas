@@ -1,8 +1,8 @@
-using Atlas.Domain.Enums;
-using Atlas.Exceptions.Resources;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using Atlas.Domain.Enums;
+using Atlas.Exceptions.Resources;
 
 namespace Atlas.Domain.Entities;
 
@@ -12,7 +12,7 @@ public partial class Article : BaseEntity
     public const int TitleMaxLength = 255;
 
     public int CreatorId { get; private set; }
-    public int? PublisherId { get; private set; }  
+    public int? PublisherId { get; private set; }
     public int CategoryId { get; private set; }
     public string Title { get; private set; } = string.Empty;
     public string Slug { get; private set; } = string.Empty;
@@ -40,7 +40,7 @@ public partial class Article : BaseEntity
         Content = content;
         Status = ArticleStatus.Draft;
         Creator = creator;
-        Category = category;    
+        Category = category;
     }
 
     private Article() { }
@@ -176,17 +176,17 @@ public partial class Article : BaseEntity
         }
     }
 
-    private void ValidateCreator(User creator)
+    private static void ValidateCreator(User creator)
     {
         ArgumentNullException.ThrowIfNull(creator, nameof(creator));
     }
 
-    private void ValidatePublisher(User publisher)
+    private static void ValidatePublisher(User publisher)
     {
         ArgumentNullException.ThrowIfNull(publisher, nameof(publisher));
     }
 
-    private void ValidateCategory(Category category)
+    private static void ValidateCategory(Category category)
     {
         ArgumentNullException.ThrowIfNull(category, nameof(category));
     }
