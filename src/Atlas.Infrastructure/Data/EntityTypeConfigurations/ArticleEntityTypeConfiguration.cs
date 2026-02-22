@@ -33,10 +33,7 @@ namespace Atlas.Infrastructure.Data.EntityTypeConfigurations
                     str => Enum.Parse<ArticleStatus>(str)
                 );
 
-            builder
-                .Property(article => article.PublishedAt)
-                .HasColumnName("published_at")
-                .IsRequired();
+            builder.Property(article => article.PublishedAt).HasColumnName("published_at");
 
             builder.Property(article => article.CreatedAt).HasColumnName("created_at").IsRequired();
             builder.Property(article => article.UpdatedAt).HasColumnName("updated_at").IsRequired();
