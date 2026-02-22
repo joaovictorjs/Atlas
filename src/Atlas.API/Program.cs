@@ -1,11 +1,13 @@
 using Atlas.API.Extensions;
+using Atlas.API.Filters.ExceptionFilter;
 using Atlas.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddUserSecrets<Program>();
-builder.Services.AddOpenApi().AddControllers();
+builder.Services.AddOpenApi();
+builder.Services.AddControllers(options => options.Filters.Add<CustomExceptionFilter>());
 builder.Services.AddDbContext<AtlasDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("Default");

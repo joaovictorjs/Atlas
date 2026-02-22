@@ -1,6 +1,10 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Atlas.API/Atlas.API.csproj" />
+    <Project
+      Path="src/Atlas.Application/Atlas.Application.csproj"
+      Id="fbc876b4-f827-482c-9143-5b2f51dabb2a"
+    />
     <Project Path="src/Atlas.Domain/Atlas.Domain.csproj" />
     <Project
       Path="src/Atlas.Exceptions/Atlas.Exceptions.csproj"
