@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -15,23 +15,27 @@ namespace Atlas.Infrastructure.Data.Migrations
                 table: "articles",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.AddColumn<int>(
                 name: "publisher_id",
                 table: "articles",
                 type: "integer",
-                nullable: true);
+                nullable: true
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_articles_creator_id",
                 table: "articles",
-                column: "creator_id");
+                column: "creator_id"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_articles_publisher_id",
                 table: "articles",
-                column: "publisher_id");
+                column: "publisher_id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_articles_users_creator_id",
@@ -39,7 +43,8 @@ namespace Atlas.Infrastructure.Data.Migrations
                 column: "creator_id",
                 principalTable: "users",
                 principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_articles_users_publisher_id",
@@ -47,7 +52,8 @@ namespace Atlas.Infrastructure.Data.Migrations
                 column: "publisher_id",
                 principalTable: "users",
                 principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict
+            );
         }
 
         /// <inheritdoc />
@@ -55,27 +61,21 @@ namespace Atlas.Infrastructure.Data.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_articles_users_creator_id",
-                table: "articles");
+                table: "articles"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_articles_users_publisher_id",
-                table: "articles");
+                table: "articles"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_articles_creator_id",
-                table: "articles");
+            migrationBuilder.DropIndex(name: "IX_articles_creator_id", table: "articles");
 
-            migrationBuilder.DropIndex(
-                name: "IX_articles_publisher_id",
-                table: "articles");
+            migrationBuilder.DropIndex(name: "IX_articles_publisher_id", table: "articles");
 
-            migrationBuilder.DropColumn(
-                name: "creator_id",
-                table: "articles");
+            migrationBuilder.DropColumn(name: "creator_id", table: "articles");
 
-            migrationBuilder.DropColumn(
-                name: "publisher_id",
-                table: "articles");
+            migrationBuilder.DropColumn(name: "publisher_id", table: "articles");
         }
     }
 }

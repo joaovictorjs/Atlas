@@ -12,6 +12,8 @@ public class Tag : BaseEntity
 
     // Navigation
     public User Creator { get; private set; } = null!;
+    public ICollection<ArticleTag> ArticleTags { get; private set; } = null!;
+
 
     public Tag(string name, User creator)
     {

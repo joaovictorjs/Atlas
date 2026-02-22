@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -15,12 +15,14 @@ namespace Atlas.Infrastructure.Data.Migrations
                 table: "categories",
                 type: "integer",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 0
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_categories_creator_id",
                 table: "categories",
-                column: "creator_id");
+                column: "creator_id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_categories_users_creator_id",
@@ -28,7 +30,8 @@ namespace Atlas.Infrastructure.Data.Migrations
                 column: "creator_id",
                 principalTable: "users",
                 principalColumn: "id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Restrict
+            );
         }
 
         /// <inheritdoc />
@@ -36,15 +39,12 @@ namespace Atlas.Infrastructure.Data.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_categories_users_creator_id",
-                table: "categories");
+                table: "categories"
+            );
 
-            migrationBuilder.DropIndex(
-                name: "IX_categories_creator_id",
-                table: "categories");
+            migrationBuilder.DropIndex(name: "IX_categories_creator_id", table: "categories");
 
-            migrationBuilder.DropColumn(
-                name: "creator_id",
-                table: "categories");
+            migrationBuilder.DropColumn(name: "creator_id", table: "categories");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -17,7 +17,8 @@ namespace Atlas.Infrastructure.Data.Migrations
                 maxLength: 255,
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
         }
 
         /// <inheritdoc />
@@ -30,7 +31,8 @@ namespace Atlas.Infrastructure.Data.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "character varying(255)",
-                oldMaxLength: 255);
+                oldMaxLength: 255
+            );
         }
     }
 }

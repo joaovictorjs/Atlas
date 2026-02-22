@@ -24,6 +24,7 @@ public partial class Article : BaseEntity
     public User Creator { get; private set; } = null!;
     public User? Publisher { get; private set; }
     public Category Category { get; private set; } = null!;
+    public ICollection<ArticleTag> ArticleTags { get; private set; } = null!;
 
     public Article(string title, string content, User creator, Category category)
     {
